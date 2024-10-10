@@ -1,76 +1,121 @@
-# Wine-Quality-Prediction-Using-Machine-Learning-Techniques
+# End-to-end-ML-Project
+
+
+## Workflows
+
+1. update config.yaml
+2. update schema.yaml
+3. update params.yaml
+4. update the entity 
+5. update the configuration manager in src config
+6. update the components
+7. update the pipeline
+8. update the main.py
+9. update the app.py
+
+# How to run?
+### STEPS:
+
+
+```bash
+conda create -n mlproj python=3.8 -y 
+```
+
+```bash
+conda activate mlproj
+```
+
+
+```bash
+pip install -r requirements.txt
+```
+
+```bash
+python app.py
+```
+
+```bash
+Now open up your local host 0.0.0.0:8080
+```
 
 
 
-## **Introduction**
-This project explores the prediction of wine quality using data analysis and machine learning techniques. Leveraging physicochemical properties of wine, the analysis aims to provide insights into key factors that influence wine quality. The project involves comprehensive data preprocessing, exploratory data analysis (EDA), and building regression models to predict wine quality scores. This project demonstrates proficiency in data handling, model optimization, and decision-making, aligning well with Data Analyst and Business Analyst roles.
+# AWS-CICD-Deployment-with-Github-Actions
 
-## **Objective**
-To predict wine quality using machine learning models and uncover insights from the dataset, enabling better decision-making and process optimization in wine production.
+## 1. Login to AWS console.
 
----
+## 2. Create IAM user for deployment
 
-## **Approach**
+	#with specific access
 
-### 1. **Data Collection**
-- The dataset was sourced from Kaggle, containing physicochemical properties of wine such as acidity, alcohol content, and pH, along with quality ratings.
+	1. EC2 access : It is virtual machine
 
-### 2. **Exploratory Data Analysis (EDA)**
-- Conducted thorough data cleaning, handling missing values and outliers using **Pandas**.
-- Performed data visualization with **Matplotlib** to identify feature correlations and trends.
-- Analyzed relationships between key features (e.g., alcohol, pH, acidity) and quality ratings.
+	2. ECR: Elastic Container registry to save your docker image in aws
 
-### 3. **Feature Engineering & Selection**
-- Selected important features based on their correlation to wine quality and their impact on predictive accuracy.
 
-### 4. **Model Building**
-- Developed regression models using **Elastic Net** and **Random Forest** with **Scikit-learn**.
-- Hyperparameter tuning was performed to optimize model performance.
+	#Description: About the deployment
 
-### 5. **Evaluation**
-- Evaluated models using metrics such as **R-squared**, **MSE** (Mean Squared Error), and cross-validation.
-- Achieved a significant improvement in model accuracy through hyperparameter tuning.
+	1. Build docker image of the source code
 
-### 6. **Deployment (Optional)**
-- Deployed the model using **AWS** and containerized it with **Docker** for scalability.
-- Automated deployment processes via **CI/CD pipelines** using **GitHub Actions**.
+	2. Push your docker image to ECR
 
----
+	3. Launch Your EC2 
 
-## **Results**
-- **Model Accuracy Improvement:** Achieved a 10% improvement in prediction accuracy, increasing from 75% to 85% through effective feature selection and hyperparameter tuning.
-- **Actionable Insights:** Identified key features like alcohol and acidity that significantly impact wine quality, providing data-driven insights for optimizing wine production processes.
-- **Operational Efficiency:** Deployed the model using **AWS** and streamlined the development process through **Docker** and **CI/CD pipelines**.
+	4. Pull Your image from ECR in EC2
 
----
+	5. Lauch your docker image in EC2
 
-## **Skills Demonstrated**
-- **Data Preprocessing & EDA:** Cleaned and visualized data, identifying patterns and feature importance.
-- **Machine Learning & Optimization:** Built and optimized predictive models using Elastic Net and Random Forest, improving model performance.
-- **Deployment:** Deployed models using **AWS** and containerized with **Docker**, demonstrating scalability and automation skills through **CI/CD pipelines**.
-- **Business Impact:** Provided insights on feature importance, enabling process improvements and strategic decision-making for wine producers.
+	#Policy:
 
----
+	1. AmazonEC2ContainerRegistryFullAccess
 
-## **Languages & Technologies Used**
-### **Languages and Frameworks:**
-- **Python:** For data analysis and model building.
-- **Flask:** For optional web-based deployment.
-  
-### **Libraries:**
-- **Pandas, Numpy:** Data manipulation and preprocessing.
-- **Scikit-learn:** Model building and optimization.
-- **Matplotlib:** Data visualization.
+	2. AmazonEC2FullAccess
 
-### **Database:**
-- **Kaggle dataset (CSV)**
+	
+## 3. Create ECR repo to store/save docker image
+    - Save the URI: 136566696263.dkr.ecr.us-east-1.amazonaws.com/mlproject
 
-### **Utilities & Tools:**
-- **AWS EC2:** Computing resources.
-- **AWS S3:** Data storage.
-- **Docker:** Containerization for deployment.
-- **GitHub Actions:** For CI/CD pipelines.
-- **Jupyter Notebook:** For interactive coding and analysis.
+	
+## 4. Create EC2 machine (Ubuntu) 
 
-## **Conclusion**
-This project illustrates a comprehensive workflow for predicting wine quality, utilizing data-driven methodologies that are highly relevant to Data Analyst and Business Analyst roles. It demonstrates proficiency in data analysis, machine learning, and deployment processes, making it suitable for real-world applications in corporate settings.
+## 5. Open EC2 and Install docker in EC2 Machine:
+	
+	
+	#optinal
+
+	sudo apt-get update -y
+
+	sudo apt-get upgrade
+	
+	#required
+
+	curl -fsSL https://get.docker.com -o get-docker.sh
+
+	sudo sh get-docker.sh
+
+	sudo usermod -aG docker ubuntu
+
+	newgrp docker
+	
+# 6. Configure EC2 as self-hosted runner:
+    setting>actions>runner>new self hosted runner> choose os> then run command one by one
+
+
+# 7. Setup github secrets:
+
+    AWS_ACCESS_KEY_ID=
+
+    AWS_SECRET_ACCESS_KEY=
+
+    AWS_REGION = us-east-1
+
+    AWS_ECR_LOGIN_URI = demo>>  566373416292.dkr.ecr.ap-south-1.amazonaws.com
+
+    ECR_REPOSITORY_NAME = simple-app
+
+
+
+
+
+
+ git config --global user.name "entbappy"
